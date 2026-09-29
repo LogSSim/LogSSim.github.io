@@ -54,12 +54,15 @@ a:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; border-ra
 .news-list time { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; padding-top: 2px; white-space: nowrap; }
 
 .publications { padding-top: 40px; }
-.paper { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 26px; align-items: center; padding: 23px 0; }
+.paper { display: grid; grid-template-columns: 160px minmax(0, 1fr); grid-template-areas: "media copy"; gap: 26px; align-items: center; padding: 23px 0; }
 .paper:first-of-type { padding-top: 6px; }
+/* Keep link helpers inserted by browser extensions inside the media cell. */
+.paper-media { grid-area: media; min-width: 0; }
+.paper-copy { grid-area: copy; min-width: 0; }
 .paper-art { display: block; width: 160px; }
-.paper-art img { display: block; width: 100%; height: auto; max-height: 180px; object-fit: contain; }
+.paper-image { display: block; width: 100%; height: auto; max-height: 180px; object-fit: contain; }
 .paper-animation { aspect-ratio: 1; overflow: hidden; border-radius: 2px; }
-.paper-animation video, .paper-animation img { display: block; width: 100%; height: 100%; aspect-ratio: 1; object-fit: cover; }
+.paper-animation video, .paper-animation .paper-image { display: block; width: 100%; height: 100%; aspect-ratio: 1; object-fit: cover; }
 .paper-animation .preview-still { display: none; }
 .paper-animation.is-static video { display: none; }
 .paper-animation.is-static .preview-still { display: block; }
@@ -68,7 +71,7 @@ a:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; border-ra
 .authors, .venue { font-size: 13px; }
 .venue { color: #3d4650; font-style: italic; }
 .paper-summary { color: #38414b; font-size: 13px; line-height: 1.55; margin-top: 9px !important; }
-.paper-links { display: flex; align-items: center; gap: 9px; margin-top: 8px !important; font-size: 13px; }
+.paper-links { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin-top: 8px !important; font-size: 13px; }
 .paper-links span { color: #bec5cc; }
 
 .earlier { padding-top: 33px; }
@@ -99,7 +102,7 @@ a:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; border-ra
   .profile-copy p { margin-bottom: 0; }
   .contact-links { margin-top: 5px; }
   .section h2 { font-size: 22px; }
-  .paper { grid-template-columns: 1fr; gap: 10px; align-items: start; padding: 22px 0; }
+  .paper { grid-template-columns: 1fr; grid-template-areas: "media" "copy"; gap: 10px; align-items: start; padding: 22px 0; }
   .paper-art { width: 100%; max-width: 260px; }
   .paper-animation { width: 180px; }
   .paper h3 { font-size: 15px; }
